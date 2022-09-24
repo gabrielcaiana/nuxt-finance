@@ -76,6 +76,11 @@ const emit = defineEmits(['close'])
                 <input
                   class="text-small w-full flex-1 rounded-lg bg-zinc-800 py-3 px-4 text-white placeholder:text-zinc-500"
                   type="text"
+                  placeholder="Data"
+                />
+                <input
+                  class="text-small w-full flex-1 rounded-lg bg-zinc-800 py-3 px-4 text-white placeholder:text-zinc-500"
+                  type="text"
                   placeholder="Categoria"
                 />
               </div>
