@@ -77,7 +77,7 @@ import {
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
-                        Salário
+                        Petlove
                       </td>
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-green-500"
@@ -87,7 +87,7 @@ import {
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
-                        Entradas
+                        Salários
                       </td>
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
