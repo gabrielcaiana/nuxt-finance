@@ -1,0 +1,179 @@
+<script lang="ts" setup>
+import {
+  PhArrowCircleUp,
+  PhArrowCircleDown,
+  PhCurrencyDollar,
+  PhMagnifyingGlass,
+} from 'phosphor-vue'
+</script>
+
+<template>
+  <div>
+    <section>
+      <div class="flex justify-between">
+        <div
+          class="flex w-[352px] items-start justify-between rounded-lg bg-gray-900 px-8 py-6"
+        >
+          <div>
+            <strong class="block text-sm text-gray-400">Entradas</strong>
+            <span class="block text-2xl font-medium text-gray-100"
+              >R$ 17.400,00</span
+            >
+          </div>
+          <PhArrowCircleUp :size="32" color="rgb(21 128 61)" />
+        </div>
+
+        <div
+          class="flex w-[352px] items-start justify-between rounded-lg bg-gray-900 px-8 py-6"
+        >
+          <div>
+            <strong class="block text-sm text-gray-400">Saídas</strong>
+            <span class="block text-2xl font-medium text-gray-100"
+              >R$ 17.400,00</span
+            >
+          </div>
+          <PhArrowCircleDown :size="32" color="rgb(239 68 68)" />
+        </div>
+
+        <div
+          class="flex w-[352px] items-start justify-between rounded-lg bg-green-700 px-8 py-6"
+        >
+          <div>
+            <strong class="block text-sm text-gray-100">Total</strong>
+            <span class="block text-2xl font-medium text-gray-100"
+              >R$ 17.400,00</span
+            >
+          </div>
+          <PhCurrencyDollar :size="32" color="white" />
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <header class="mt-12 flex gap-4">
+        <input
+          class="text-small flex-1 rounded-lg bg-gray-900 py-3 px-4 text-white placeholder:text-zinc-500"
+          type="text"
+          placeholder="Busque uma transação"
+        />
+        <button
+          class="flex flex-row-reverse gap-3 rounded-lg border border-white px-4 py-3 font-medium text-white transition-colors"
+        >
+          Buscar
+          <PhMagnifyingGlass :size="24" color="white" />
+        </button>
+      </header>
+
+      <main class="mt-6 w-full">
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div class="overflow-hidden">
+                <table class="min-w-full">
+                  <thead class="border-b">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="px-6 py-4 text-left text-sm font-medium text-white"
+                      >
+                        Descrição
+                      </th>
+                      <th
+                        scope="col"
+                        class="px-6 py-4 text-left text-sm font-medium text-white"
+                      >
+                        Valor
+                      </th>
+                      <th
+                        scope="col"
+                        class="px-6 py-4 text-left text-sm font-medium text-white"
+                      >
+                        Categoria
+                      </th>
+                      <th
+                        scope="col"
+                        class="px-6 py-4 text-left text-sm font-medium text-white"
+                      >
+                        Data
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b">
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        Salário
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-green-500"
+                      >
+                        R$ 2.000,00
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        Entradas
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        24/09/2022
+                      </td>
+                    </tr>
+
+                    <tr class="border-b">
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        Pizza
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-red-500"
+                      >
+                        -R$ 59,00
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        Alimentação
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        24/09/2022
+                      </td>
+                    </tr>
+
+                    <tr class="border-b">
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        Hamburguer
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-red-500"
+                      >
+                        -R$ 45,00
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        Alimentação
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
+                      >
+                        24/09/2022
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+</template>
