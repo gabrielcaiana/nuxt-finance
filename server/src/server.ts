@@ -53,8 +53,9 @@ app.get('/transactions', async (req, res) => {
     select: {
       id: true,
       description: true,
+      amount: true,
       date: true,
-      categoriesId: true,
+      categories: true,
     },
   });
 
@@ -66,6 +67,7 @@ app.post('/transactions', async (req, res) => {
   const transaction = await prisma.transactions.create({
     data: {
       description: body.description,
+      amount: body.amount,
       date: new Date(body.date),
       categoriesId: body.categoriesId,
     },
