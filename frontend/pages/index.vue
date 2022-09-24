@@ -12,7 +12,7 @@ import {
     <section>
       <div class="flex justify-between">
         <div
-          class="flex w-[352px] items-start justify-between rounded-lg bg-gray-900 px-8 py-6"
+          class="flex w-[352px] items-start justify-between rounded-lg bg-zinc-900 px-8 py-6"
         >
           <div>
             <strong class="block text-sm text-gray-400">Entradas</strong>
@@ -24,7 +24,7 @@ import {
         </div>
 
         <div
-          class="flex w-[352px] items-start justify-between rounded-lg bg-gray-900 px-8 py-6"
+          class="flex w-[352px] items-start justify-between rounded-lg bg-zinc-900 px-8 py-6"
         >
           <div>
             <strong class="block text-sm text-gray-400">Saídas</strong>
@@ -52,7 +52,7 @@ import {
     <section>
       <header class="mt-12 flex gap-4">
         <input
-          class="text-small flex-1 rounded-lg bg-gray-900 py-3 px-4 text-white placeholder:text-zinc-500"
+          class="text-small flex-1 rounded-lg bg-zinc-900 py-3 px-4 text-white placeholder:text-zinc-500"
           type="text"
           placeholder="Busque uma transação"
         />
@@ -64,42 +64,14 @@ import {
         </button>
       </header>
 
-      <main class="mt-6 w-full">
+      <main class="mt-4 w-full">
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
               <div class="overflow-hidden">
                 <table class="min-w-full">
-                  <thead class="border-b">
-                    <tr>
-                      <th
-                        scope="col"
-                        class="px-6 py-4 text-left text-sm font-medium text-white"
-                      >
-                        Descrição
-                      </th>
-                      <th
-                        scope="col"
-                        class="px-6 py-4 text-left text-sm font-medium text-white"
-                      >
-                        Valor
-                      </th>
-                      <th
-                        scope="col"
-                        class="px-6 py-4 text-left text-sm font-medium text-white"
-                      >
-                        Categoria
-                      </th>
-                      <th
-                        scope="col"
-                        class="px-6 py-4 text-left text-sm font-medium text-white"
-                      >
-                        Data
-                      </th>
-                    </tr>
-                  </thead>
                   <tbody>
-                    <tr class="border-b">
+                    <tr class="border-2 border-b border-zinc-800 bg-zinc-900">
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
@@ -122,7 +94,7 @@ import {
                       </td>
                     </tr>
 
-                    <tr class="border-b">
+                    <tr class="border-2 border-b border-zinc-800 bg-zinc-900">
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
@@ -145,7 +117,7 @@ import {
                       </td>
                     </tr>
 
-                    <tr class="border-b">
+                    <tr class="border-b border-zinc-800 bg-zinc-900">
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
