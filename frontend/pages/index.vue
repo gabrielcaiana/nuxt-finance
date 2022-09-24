@@ -1,10 +1,14 @@
-<script lang="ts" setup>
+<script setup>
 import {
   PhArrowCircleUp,
   PhArrowCircleDown,
   PhCurrencyDollar,
   PhMagnifyingGlass,
 } from 'phosphor-vue'
+
+const { data: transactions } = await useFetch(
+  'http://localhost:3333/transactions'
+)
 </script>
 
 <template>
@@ -73,76 +77,28 @@ import {
                   <tbody>
                     <tr
                       class="cursor-pointer border-2 border-b border-zinc-800 bg-zinc-900"
+                      v-for="transaction in transactions"
+                      :key="transaction.id"
                     >
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
-                        Petlove
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-6 py-4 text-sm text-green-500"
-                      >
-                        R$ 2.000,00
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
-                      >
-                        Salários
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
-                      >
-                        24/09/2022
-                      </td>
-                    </tr>
-
-                    <tr
-                      class="cursor-pointer border-2 border-b border-zinc-800 bg-zinc-900"
-                    >
-                      <td
-                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
-                      >
-                        Pizza
+                        {{ transaction.description }}
                       </td>
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-red-500"
                       >
-                        - R$ 59,00
+                        - R$ {{ transaction.amount }}
                       </td>
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
-                        Alimentação
+                        {{ transaction.categories.name }}
                       </td>
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
-                        24/09/2022
-                      </td>
-                    </tr>
-
-                    <tr
-                      class="cursor-pointer border-b border-zinc-800 bg-zinc-900"
-                    >
-                      <td
-                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
-                      >
-                        Hamburguer
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-6 py-4 text-sm text-red-500"
-                      >
-                        - R$ 45,00
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
-                      >
-                        Alimentação
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-6 py-4 text-sm text-white"
-                      >
-                        24/09/2022
+                        {{ transaction.data }}
                       </td>
                     </tr>
                   </tbody>
