@@ -10,9 +10,9 @@ import {
 <template>
   <div>
     <section>
-      <div class="flex justify-between">
+      <div class="flex flex-col justify-between gap-4 md:flex-row">
         <div
-          class="flex w-[352px] items-start justify-between rounded-lg bg-zinc-900 px-8 py-6"
+          class="flex w-full items-start justify-between rounded-lg bg-zinc-900 px-8 py-6"
         >
           <div>
             <strong class="block text-sm text-gray-400">Entradas</strong>
@@ -24,7 +24,7 @@ import {
         </div>
 
         <div
-          class="flex w-[352px] items-start justify-between rounded-lg bg-zinc-900 px-8 py-6"
+          class="flex w-full items-start justify-between rounded-lg bg-zinc-900 px-8 py-6"
         >
           <div>
             <strong class="block text-sm text-gray-400">Saídas</strong>
@@ -36,7 +36,7 @@ import {
         </div>
 
         <div
-          class="flex w-[352px] items-start justify-between rounded-lg bg-green-700 px-8 py-6"
+          class="flex w-full items-start justify-between rounded-lg bg-green-700 px-8 py-6"
         >
           <div>
             <strong class="block text-sm text-gray-100">Total</strong>
@@ -50,14 +50,14 @@ import {
     </section>
 
     <section>
-      <header class="mt-12 flex gap-4">
+      <header class="mt-12 flex flex-col gap-4 md:flex-row">
         <input
           class="text-small flex-1 rounded-lg bg-zinc-900 py-3 px-4 text-white placeholder:text-zinc-500"
           type="text"
           placeholder="Busque uma transação"
         />
         <button
-          class="flex flex-row-reverse gap-3 rounded-lg border border-white px-4 py-3 font-medium text-white transition-colors"
+          class="flex flex-row-reverse items-center justify-center gap-3 rounded-lg border border-white px-4 py-3 font-medium text-white transition-colors"
         >
           Buscar
           <PhMagnifyingGlass :size="24" color="white" />
@@ -71,7 +71,9 @@ import {
               <div class="overflow-hidden">
                 <table class="min-w-full">
                   <tbody>
-                    <tr class="border-2 border-b border-zinc-800 bg-zinc-900">
+                    <tr
+                      class="cursor-pointer border-2 border-b border-zinc-800 bg-zinc-900"
+                    >
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
@@ -94,7 +96,9 @@ import {
                       </td>
                     </tr>
 
-                    <tr class="border-2 border-b border-zinc-800 bg-zinc-900">
+                    <tr
+                      class="cursor-pointer border-2 border-b border-zinc-800 bg-zinc-900"
+                    >
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
@@ -103,7 +107,7 @@ import {
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-red-500"
                       >
-                        -R$ 59,00
+                        - R$ 59,00
                       </td>
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
@@ -117,7 +121,9 @@ import {
                       </td>
                     </tr>
 
-                    <tr class="border-b border-zinc-800 bg-zinc-900">
+                    <tr
+                      class="cursor-pointer border-b border-zinc-800 bg-zinc-900"
+                    >
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
@@ -126,7 +132,7 @@ import {
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-red-500"
                       >
-                        -R$ 45,00
+                        - R$ 45,00
                       </td>
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"

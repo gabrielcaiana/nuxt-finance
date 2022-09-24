@@ -12,6 +12,7 @@
     "format-write": "npx prettier --write ./"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.2",
     "phosphor-vue": "^4.4.0"
   },
   "devDependencies": {
