@@ -17,7 +17,7 @@ function openModal() {
       <div
         class="container m-auto flex max-w-[1100px] items-center justify-between"
       >
-        <h1 class="text-xl font-bold text-white md:text-2xl">Caiana Finance</h1>
+        <h1 class="text-xl font-bold text-white md:text-2xl">Finanças</h1>
         <button
           @click="openModal"
           class="rounded-lg bg-green-700 px-4 py-3 font-medium text-white transition-colors hover:bg-green-800"

@@ -21,7 +21,7 @@ const { data: transactions } = await useFetch(
           <div>
             <strong class="block text-sm text-gray-400">Entradas</strong>
             <span class="block text-2xl font-medium text-gray-100"
-              >R$ 17.400,00</span
+              >R$ 2.000,00</span
             >
           </div>
           <PhArrowCircleUp :size="32" color="rgb(21 128 61)" />
@@ -33,7 +33,7 @@ const { data: transactions } = await useFetch(
           <div>
             <strong class="block text-sm text-gray-400">Saídas</strong>
             <span class="block text-2xl font-medium text-gray-100"
-              >R$ 17.400,00</span
+              >R$ 400,00</span
             >
           </div>
           <PhArrowCircleDown :size="32" color="rgb(239 68 68)" />
@@ -45,7 +45,7 @@ const { data: transactions } = await useFetch(
           <div>
             <strong class="block text-sm text-gray-100">Total</strong>
             <span class="block text-2xl font-medium text-gray-100"
-              >R$ 17.400,00</span
+              >R$ 1.600,00</span
             >
           </div>
           <PhCurrencyDollar :size="32" color="white" />
@@ -98,7 +98,9 @@ const { data: transactions } = await useFetch(
                       <td
                         class="whitespace-nowrap px-6 py-4 text-sm text-white"
                       >
-                        {{ transaction.data }}
+                        {{
+                          new Date(transaction.date).toLocaleDateString('pt-BR')
+                        }}
                       </td>
                     </tr>
                   </tbody>
