@@ -2,8 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
 
-import { Transaction } from './interfaces/Transaction';
-import { Categorie } from './interfaces/Categorie';
+import { Transaction, Categorie, Account } from './interfaces';
 
 const app = express();
 app.use(express.json());
@@ -33,10 +32,11 @@ async function verifyIfExistsTransaction(req, res, next) {
 
 async function verifyIfExistsCategorie(req, res, next) {
   const { id } = req.params;
+  const { categoriesId } = req.body;
 
   const result = await prisma.categories.findUnique({
     where: {
-      id: id,
+      id: id || categoriesId,
     },
   });
 
@@ -48,6 +48,25 @@ async function verifyIfExistsCategorie(req, res, next) {
   return next();
 }
 
+async function verifyIfExistsAccount(req, res, next) {
+  const { accountCpf } = req.body;
+  const { cpf } = req.params;
+
+  const result = await prisma.account.findUnique({
+    where: {
+      cpf: accountCpf || cpf,
+    },
+  });
+
+  if (!result) {
+    return res.status(400).send({ error: 'Account not found!' });
+  }
+
+  req.cpf = result.cpf;
+  return next();
+}
+
+// transactions
 app.get('/transactions', async (req, res) => {
   const transactions = await prisma.transactions.findMany({
     select: {
@@ -56,42 +75,62 @@ app.get('/transactions', async (req, res) => {
       amount: true,
       date: true,
       categories: true,
+      type: true,
+      Account: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
     },
   });
 
   return res.json(transactions);
 });
 
-app.post('/transactions', async (req, res) => {
-  const body: Transaction = req.body;
-  const transaction = await prisma.transactions.create({
-    data: {
-      description: body.description,
-      amount: body.amount,
-      date: new Date(body.date),
-      categoriesId: body.categoriesId,
-    },
-  });
+app.post(
+  '/transactions',
+  verifyIfExistsCategorie,
+  verifyIfExistsAccount,
+  async (req, res) => {
+    const body = req.body;
 
-  return res.status(200).json(transaction);
-});
+    const transaction: Transaction = await prisma.transactions.create({
+      data: {
+        description: body.description,
+        amount: body.amount,
+        type: body.type,
+        date: new Date(body.date),
+        categoriesId: body.categoriesId,
+        accountCpf: body.accountCpf,
+      },
+    });
 
-app.put('/transactions/:id', async (req, res) => {
-  const { id } = req.params;
-  const body: Transaction = req.body;
-  const updateTransaction: any = await prisma.transactions.update({
-    where: {
-      id: id,
-    },
+    return res.status(200).json(transaction);
+  }
+);
 
-    data: {
-      ...body,
-      date: new Date(body.date),
-    },
-  });
+app.put(
+  '/transactions/:id',
+  verifyIfExistsCategorie,
+  verifyIfExistsAccount,
+  async (req, res) => {
+    const { id } = req.params;
+    const body: Transaction = req.body;
+    const updateTransaction: any = await prisma.transactions.update({
+      where: {
+        id: id,
+      },
 
-  return res.status(200).json(updateTransaction);
-});
+      data: {
+        ...body,
+        date: new Date(body.date),
+      },
+    });
+
+    return res.status(200).json(updateTransaction);
+  }
+);
 
 app.delete(
   '/transactions/:id',
@@ -109,6 +148,7 @@ app.delete(
   }
 );
 
+// categories
 app.get('/categories', async (req, res) => {
   const categories = await prisma.categories.findMany({
     select: {
@@ -132,8 +172,8 @@ app.post('/categories', async (req, res) => {
   return res.status(200).json(cateogie);
 });
 
-app.put('/categories/:id', async (req, res) => {
-  const { id } = req.params;
+app.put('/categories/:id', verifyIfExistsCategorie, async (req: any, res) => {
+  const { id } = req;
   const body: Categorie = req.body;
   const updateCategorie = await prisma.categories.update({
     where: {
@@ -163,5 +203,61 @@ app.delete(
     return res.send(200);
   }
 );
+
+// account
+app.get('/account', async (req, res) => {
+  const account = await prisma.account.findMany({
+    select: {
+      name: true,
+      email: true,
+      cpf: true,
+      transactions: true,
+    },
+  });
+
+  return res.json(account);
+});
+
+app.post('/account', async (req: any, res) => {
+  const body = req.body;
+
+  const accountExists = await prisma.account.findUnique({
+    where: {
+      cpf: body.cpf,
+    },
+  });
+
+  if (accountExists) {
+    return res.status(400).send({ error: 'Account already exists!' });
+  }
+
+  const account: Account = await prisma.account.create({
+    data: {
+      cpf: body.cpf,
+      email: body.email,
+      name: body.name,
+    },
+  });
+
+  return res.status(200).json(account);
+});
+
+app.delete('/account/:cpf', verifyIfExistsAccount, async (req: any, res) => {
+  const { cpf } = req;
+
+  await prisma.account.delete({
+    where: {
+      cpf: cpf,
+    },
+  });
+
+  await prisma.transactions.deleteMany({
+    where: {
+      accountCpf: cpf,
+    },
+  });
+
+  return res.send(200);
+});
 
 app.listen('3333');
