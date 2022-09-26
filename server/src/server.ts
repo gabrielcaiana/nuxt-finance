@@ -16,9 +16,11 @@ import {
 import account from './controllers/account';
 import transactions from './controllers/transactions';
 import categories from './controllers/categories';
+import balance from './controllers/balance';
 
 // account
 app.get('/account', account.index);
+app.get('/account/:cpf', account.indexByDocument);
 app.post('/account', account.create);
 app.delete('/account/:cpf', verifyIfExistsAccount, account.delete);
 
@@ -43,6 +45,11 @@ app.get('/categories', categories.index);
 app.post('/categories', categories.create);
 app.put('/categories/:id', verifyIfExistsCategorie, categories.update);
 app.delete('/categories/:id', verifyIfExistsCategorie, categories.delete);
+
+// balance
+app.get('/balance/:cpf', balance.index);
+app.post('/balance/:cpf', balance.create);
+app.delete('/balance/:cpf', balance.delete);
 
 // server
 app.listen('3333');

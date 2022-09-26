@@ -13,15 +13,25 @@ export default {
         name: true,
         email: true,
         cpf: true,
-        transactions: {
-          select: {
-            type: true,
-            amount: true,
-            date: true,
-            categories: true,
-          },
-        },
-        _count: true,
+        transactions: true,
+        Balance: true,
+      },
+    });
+    return res.json(account);
+  },
+
+  async indexByDocument(req, res) {
+    const { cpf } = req.params;
+    const account = await prisma.account.findUnique({
+      where: {
+        cpf: cpf,
+      },
+      select: {
+        name: true,
+        email: true,
+        cpf: true,
+        transactions: true,
+        Balance: true,
       },
     });
 

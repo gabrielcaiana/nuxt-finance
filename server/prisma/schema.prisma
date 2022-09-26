@@ -30,9 +30,18 @@ model Transactions {
   accountCpf   String
 }
 
+model Balance {
+  accountCpf String  @unique
+  deposit    Float
+  expense    Float
+  balance    Float
+  account    Account @relation(fields: [accountCpf], references: [cpf])
+}
+
 model Account {
   cpf          String         @id @unique
   name         String
   email        String
   transactions Transactions[]
+  Balance      Balance[]
 }
