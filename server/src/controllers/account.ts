@@ -5,6 +5,7 @@ const prisma = new PrismaClient({
 });
 
 import { Account } from '../interfaces';
+import { getBalance } from '../services/calculateBalance';
 
 export default {
   async index(req, res) {
@@ -14,9 +15,9 @@ export default {
         email: true,
         cpf: true,
         transactions: true,
-        Balance: true,
       },
     });
+
     return res.json(account);
   },
 
@@ -31,11 +32,19 @@ export default {
         email: true,
         cpf: true,
         transactions: true,
-        Balance: true,
       },
     });
 
-    return res.json(account);
+    const { balance, deposit, expense } = await getBalance(
+      account?.transactions
+    );
+
+    return res.json({
+      ...account,
+      balance,
+      deposit,
+      expense,
+    });
   },
 
   async create(req, res) {

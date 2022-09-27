@@ -4,36 +4,7 @@ const prisma = new PrismaClient({
   log: ['query'],
 });
 
-const getBalance = (statement) => {
-  if (!statement.transaction) {
-    const balance = 0.0;
-    return balance;
-  }
-
-  const balance = statement.reduce((acc, operation) => {
-    operation.type === 'deposit'
-      ? acc + operation.amount
-      : acc - operation.amount;
-  }, 0);
-
-  return balance;
-};
-
-const getDeposit = (statement) => {
-  const deposits = statement.filter((deposit) => deposit.type === 'deposit');
-  const calculateDeposit = deposits.reduce((acc, operation) => {
-    return acc + operation.amount;
-  }, 0);
-  return calculateDeposit;
-};
-
-const getExpense = (statement) => {
-  const expenses = statement.filter((deposit) => deposit.type === 'expense');
-  const calculateExpenses = expenses.reduce((acc, operation) => {
-    return acc + operation.amount;
-  }, 0);
-  return calculateExpenses;
-};
+import { getBalance } from '../services/calculateBalance';
 
 export default {
   async index(req, res) {
@@ -48,7 +19,13 @@ export default {
         name: true,
         email: true,
         cpf: true,
-        Balance: true,
+        Balance: {
+          select: {
+            balance: true,
+            deposit: true,
+            expense: true,
+          },
+        },
         transactions: true,
       },
     });
@@ -81,16 +58,9 @@ export default {
       },
     });
 
-    // if (!account?.transactions.length) {
-    //   return res
-    //     .status(400)
-    //     .send({ error: 'There must be at least one transaction!' });
-    // }
-
-    const balance = await getBalance(account?.transactions);
-    const deposit = await getDeposit(account?.transactions);
-    const expense = await getExpense(account?.transactions);
-
+    const { balance, deposit, expense } = await getBalance(
+      account?.transactions
+    );
     const result = await prisma.balance.create({
       data: {
         balance,
@@ -98,11 +68,14 @@ export default {
         expense,
         accountCpf: cpf,
       },
+      select: {
+        balance: true,
+        deposit: true,
+        expense: true,
+      },
     });
 
-    return res.status(200).json({
-      result,
-    });
+    return res.status(200).json(result);
   },
 
   async delete(req, res) {
