@@ -7,7 +7,20 @@ import {
   DialogTitle,
 } from '@headlessui/vue'
 
-import { PhX } from 'phosphor-vue'
+import { PhArrowCircleUp, PhArrowCircleDown, PhX } from 'phosphor-vue'
+
+const deposit = ref(false)
+const expense = ref(false)
+
+const setDeposit = () => {
+  deposit.value = true
+  expense.value = false
+}
+
+const setExpense = () => {
+  expense.value = true
+  deposit.value = false
+}
 
 defineProps({
   isOpen: Boolean,
@@ -62,6 +75,7 @@ const emit = defineEmits(['close'])
                   @click="emit('close')"
                 />
               </div>
+
               <div class="mt-2 flex flex-col gap-3">
                 <input
                   class="text-small w-full flex-1 rounded-lg bg-zinc-800 py-3 px-4 text-white placeholder:text-zinc-500"
@@ -76,16 +90,39 @@ const emit = defineEmits(['close'])
                 <input
                   class="text-small w-full flex-1 rounded-lg bg-zinc-800 py-3 px-4 text-white placeholder:text-zinc-500"
                   type="text"
-                  placeholder="Data"
-                />
-                <input
-                  class="text-small w-full flex-1 rounded-lg bg-zinc-800 py-3 px-4 text-white placeholder:text-zinc-500"
-                  type="text"
                   placeholder="Categoria"
                 />
+                <div class="flex gap-4">
+                  <button
+                    @click="setDeposit"
+                    :class="[
+                      'flex w-full justify-center gap-3 rounded-md bg-zinc-800 py-4 text-white',
+                      deposit && 'bg-green-700',
+                    ]"
+                  >
+                    Entrada
+                    <PhArrowCircleUp
+                      :size="24"
+                      :color="deposit ? 'white' : 'rgb(21 128 61)'"
+                    />
+                  </button>
+                  <button
+                    @click="setExpense"
+                    :class="[
+                      'flex w-full justify-center gap-3 rounded-md bg-zinc-800 py-4 text-white',
+                      expense && 'bg-red-700',
+                    ]"
+                  >
+                    Saída
+                    <PhArrowCircleDown
+                      :size="24"
+                      :color="expense ? 'white' : 'rgb(239 68 68)'"
+                    />
+                  </button>
+                </div>
               </div>
 
-              <div class="mt-4">
+              <div class="mt-8">
                 <button
                   @click="emit('close')"
                   class="w-full rounded-lg bg-green-700 px-4 py-3 font-medium text-white transition-colors hover:bg-green-800"
