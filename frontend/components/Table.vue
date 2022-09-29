@@ -22,8 +22,15 @@ defineProps({
                 <td class="whitespace-nowrap px-6 py-4 text-sm text-white">
                   {{ transaction.description }}
                 </td>
-                <td class="whitespace-nowrap px-6 py-4 text-sm text-red-500">
-                  - R$ {{ transaction.amount }}
+                <td
+                  :class="[
+                    'whitespace-nowrap px-6 py-4 text-sm text-red-500',
+                    transaction.type === 'deposit'
+                      ? 'text-green-500'
+                      : 'text-red-500',
+                  ]"
+                >
+                  R$ {{ transaction.amount }}
                 </td>
                 <td class="whitespace-nowrap px-6 py-4 text-sm text-white">
                   {{ transaction.categories.name }}

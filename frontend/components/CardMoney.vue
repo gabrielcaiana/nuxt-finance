@@ -10,11 +10,7 @@ defineProps({
     required: true,
   },
 
-  positive: {
-    type: Boolean,
-    default: false,
-  },
-  negative: {
+  cardBalance: {
     type: Boolean,
     default: false,
   },
@@ -24,9 +20,12 @@ defineProps({
 <template>
   <div
     :class="[
-      'flex w-full items-start justify-between rounded-lg bg-zinc-900 px-8 py-6',
-      positive && ' bg-green-700',
-      negative && 'bg-red-700',
+      'flex w-full items-start justify-between rounded-lg px-8 py-6',
+      value >= 0 && cardBalance
+        ? ' bg-green-700'
+        : value < 0 && cardBalance
+        ? 'bg-red-700'
+        : 'bg-zinc-900',
     ]"
   >
     <div>

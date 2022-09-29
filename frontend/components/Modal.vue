@@ -127,7 +127,7 @@ const emit = defineEmits(['close'])
                   @click="emit('close')"
                   class="w-full rounded-lg bg-green-700 px-4 py-3 font-medium text-white transition-colors hover:bg-green-800"
                 >
-                  Nova transação
+                  Cadastrar transação
                 </button>
               </div>
             </DialogPanel>

@@ -7,28 +7,44 @@ import {
 
 const {
   data: transactions,
-  pending,
-  error,
+  peding: transactionsPending,
+  error: transactionsError,
 } = await useFetch('http://localhost:3333/transactions')
+
+const {
+  data: account,
+  pending: accountPending,
+  error: accountError,
+} = await useFetch('http://localhost:3333/account/45075141854')
 </script>
 
 <template>
   <div>
     <section>
-      <div class="flex flex-col justify-between gap-4 md:flex-row">
-        <CardMoney title="Entradas" value="2.000,00">
+      <span
+        class="block py-6 text-center text-xl text-white"
+        v-if="accountPending"
+        >Carregando ...</span
+      >
+      <span
+        class="block py-6 text-center text-xl text-red-500"
+        v-else-if="accountError"
+        >{{ accountError }}</span
+      >
+      <div v-else class="flex flex-col justify-between gap-4 md:flex-row">
+        <CardMoney title="Entradas" :value="account.deposit">
           <template v-slot:icon>
             <PhArrowCircleUp :size="32" color="rgb(21 128 61)" />
           </template>
         </CardMoney>
 
-        <CardMoney title="Saídas" value="400,00">
+        <CardMoney title="Saídas" :value="account.expense">
           <template v-slot:icon>
             <PhArrowCircleDown :size="32" color="rgb(239 68 68)" />
           </template>
         </CardMoney>
 
-        <CardMoney title="Total" value="1.600,00" negative>
+        <CardMoney title="Total" :value="account.balance" cardBalance>
           <template v-slot:icon>
             <PhCurrencyDollar :size="32" color="white" />
           </template>
@@ -40,13 +56,15 @@ const {
       <Search />
 
       <main class="mt-4 w-full">
-        <span class="block py-6 text-center text-xl text-white" v-if="pending"
+        <span
+          class="block py-6 text-center text-xl text-white"
+          v-if="transactionsPending"
           >Carregando ...</span
         >
         <span
           class="block py-6 text-center text-xl text-red-500"
-          v-else-if="error"
-          >{{ error }}</span
+          v-else-if="transactionsError"
+          >{{ transactionsError }}</span
         >
         <Table v-else :transactions="transactions" />
       </main>
