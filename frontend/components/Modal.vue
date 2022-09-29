@@ -9,6 +9,8 @@ import {
 
 import { PhArrowCircleUp, PhArrowCircleDown, PhX } from 'phosphor-vue'
 
+const { data: categories } = await useFetch('http://localhost:3333/categories')
+
 const deposit = ref(false)
 const expense = ref(false)
 
@@ -87,17 +89,15 @@ const emit = defineEmits(['close'])
                   type="text"
                   placeholder="Valor"
                 />
-                <input
-                  class="text-small w-full flex-1 rounded-lg bg-zinc-800 py-3 px-4 text-white placeholder:text-zinc-500"
-                  type="text"
-                  placeholder="Categoria"
-                />
+
+                <ListBox :items="categories" />
+
                 <div class="flex gap-4">
                   <button
                     @click="setDeposit"
                     :class="[
-                      'flex w-full justify-center gap-3 rounded-md bg-zinc-800 py-4 text-white',
-                      deposit && 'bg-green-700',
+                      'flex w-full justify-center gap-3 rounded-md py-4 text-white',
+                      deposit ? 'bg-green-700' : 'bg-zinc-800',
                     ]"
                   >
                     Entrada
@@ -109,8 +109,8 @@ const emit = defineEmits(['close'])
                   <button
                     @click="setExpense"
                     :class="[
-                      'flex w-full justify-center gap-3 rounded-md bg-zinc-800 py-4 text-white',
-                      expense && 'bg-red-700',
+                      'flex w-full justify-center gap-3 rounded-md py-4 text-white',
+                      expense ? 'bg-red-700' : 'bg-zinc-800',
                     ]"
                   >
                     Saída

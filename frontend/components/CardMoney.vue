@@ -6,7 +6,7 @@ defineProps({
   },
 
   value: {
-    type: String,
+    type: Number,
     required: true,
   },
 
@@ -33,7 +33,7 @@ defineProps({
         title
       }}</strong>
       <span class="block text-2xl font-medium text-gray-100"
-        >R$ {{ value }}</span
+        >R$ {{ value.toFixed(2).replace('.', ',') }}</span
       >
     </div>
     <icon :size="32" color="rgb(21 128 61)" />
