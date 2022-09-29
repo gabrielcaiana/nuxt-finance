@@ -24,7 +24,7 @@ defineProps({
                 </td>
                 <td
                   :class="[
-                    'whitespace-nowrap px-6 py-4 text-sm text-red-500',
+                    'whitespace-nowrap px-6 py-4 text-sm',
                     transaction.type === 'deposit'
                       ? 'text-green-500'
                       : 'text-red-500',
