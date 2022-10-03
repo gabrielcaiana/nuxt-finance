@@ -1,5 +1,6 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+const props = defineProps({
   title: {
     type: String,
     required: true,
@@ -15,17 +16,21 @@ defineProps({
     default: false,
   },
 })
+
+const handleValue = computed(() => props.value.toFixed(2).replace('.', ','))
+const handleCardBg =
+  props.value >= 0 && props.cardBalance
+    ? 'bg-green-700'
+    : props.value < 0 && props.cardBalance
+    ? 'bg-red-700'
+    : 'bg-zinc-900'
 </script>
 
 <template>
   <div
     :class="[
       'flex w-full items-start justify-between rounded-lg px-8 py-6',
-      value >= 0 && cardBalance
-        ? ' bg-green-700'
-        : value < 0 && cardBalance
-        ? 'bg-red-700'
-        : 'bg-zinc-900',
+      handleCardBg,
     ]"
   >
     <div>
@@ -33,7 +38,7 @@ defineProps({
         title
       }}</strong>
       <span class="block text-2xl font-medium text-gray-100"
-        >R$ {{ value.toFixed(2).replace('.', ',') }}</span
+        >R$ {{ handleValue }}</span
       >
     </div>
     <icon :size="32" color="rgb(21 128 61)" />
