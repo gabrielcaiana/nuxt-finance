@@ -10,6 +10,10 @@ describe('CardMoney.vue', () => {
         value: 1000,
       },
     })
-    expect(wrapper.exists()).toBeTruthy()
+    console.log(wrapper.html())
+
+    expect(wrapper.find('#card-money').classes()).toContain('bg-zinc-900')
+    expect(wrapper.find('strong').text()).toBe('Entrada')
+    expect(wrapper.find('span').text()).toBe('R$ 1000,00')
   })
 })

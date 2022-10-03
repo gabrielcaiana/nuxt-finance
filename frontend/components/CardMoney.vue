@@ -28,6 +28,7 @@ const handleCardBg =
 
 <template>
   <div
+    id="card-money"
     :class="[
       'flex w-full items-start justify-between rounded-lg px-8 py-6',
       handleCardBg,
