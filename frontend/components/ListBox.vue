@@ -74,5 +74,5 @@ defineProps({
   },
 })
 
-const selectedItem = ref({ name: 'Selecione uma categoria' })
+const selectedItem = ref({ name: 'Selecione a categoria' })
 </script>
