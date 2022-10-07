@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue'
 const props = defineProps({
   title: {
     type: String,
@@ -17,7 +16,7 @@ const props = defineProps({
   },
 })
 
-const handleValue = computed(() => props.value.toFixed(2).replace('.', ','))
+const convertToRealCurrency = Intl.NumberFormat('pt-BR')
 const handleCardBg =
   props.value >= 0 && props.cardBalance
     ? 'bg-green-700'
@@ -39,7 +38,7 @@ const handleCardBg =
         title
       }}</strong>
       <span class="block text-2xl font-medium text-gray-100"
-        >R$ {{ handleValue }}</span
+        >R$ {{ convertToRealCurrency.format(value) }}</span
       >
     </div>
     <icon :size="32" color="rgb(21 128 61)" />

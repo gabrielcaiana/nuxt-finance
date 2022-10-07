@@ -14,6 +14,6 @@ describe('CardMoney.vue', () => {
 
     expect(wrapper.find('#card-money').classes()).toContain('bg-zinc-900')
     expect(wrapper.find('strong').text()).toBe('Entrada')
-    expect(wrapper.find('span').text()).toBe('R$ 1000,00')
+    expect(wrapper.find('span').text()).toBe('R$ 1.000')
   })
 })
