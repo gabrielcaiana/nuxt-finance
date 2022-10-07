@@ -31,7 +31,19 @@ export default {
         name: true,
         email: true,
         cpf: true,
-        transactions: true,
+        transactions: {
+          orderBy: {
+            date: 'desc',
+          },
+          select: {
+            date: true,
+            amount: true,
+            categories: true,
+            id: true,
+            type: true,
+            description: true,
+          },
+        },
       },
     });
 
