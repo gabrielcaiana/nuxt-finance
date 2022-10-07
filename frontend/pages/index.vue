@@ -6,12 +6,6 @@ import {
 } from 'phosphor-vue'
 
 const {
-  data: transactions,
-  peding: transactionsPending,
-  error: transactionsError,
-} = await useFetch(`${process.env.API_URL}/transactions`)
-
-const {
   data: account,
   pending: accountPending,
   error: accountError,
@@ -58,17 +52,7 @@ const {
       <Search />
 
       <main class="mt-4 w-full">
-        <span
-          class="block py-6 text-center text-xl text-white"
-          v-if="transactionsPending"
-          >Carregando ...</span
-        >
-        <span
-          class="block py-6 text-center text-xl text-red-500"
-          v-else-if="transactionsError"
-          >{{ transactionsError }}</span
-        >
-        <Table v-else :transactions="transactions" />
+        <Table :transactions="account.transactions" />
       </main>
     </section>
   </div>

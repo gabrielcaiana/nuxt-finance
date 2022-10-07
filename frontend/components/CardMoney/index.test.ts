@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import CardMoney from '../components/CardMoney.vue'
+import CardMoney from './index.vue'
 
 describe('CardMoney.vue', () => {
   it('should render the correct component', () => {
