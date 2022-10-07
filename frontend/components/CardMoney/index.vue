@@ -16,7 +16,10 @@ const props = defineProps({
   },
 })
 
-const convertToRealCurrency = Intl.NumberFormat('pt-BR')
+const convertToRealCurrency = Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+})
 const handleCardBg =
   props.value >= 0 && props.cardBalance
     ? 'bg-green-700'
@@ -37,9 +40,9 @@ const handleCardBg =
       <strong class="block text-sm font-normal text-gray-200">{{
         title
       }}</strong>
-      <span class="block text-2xl font-medium text-gray-100"
-        >R$ {{ convertToRealCurrency.format(value) }}</span
-      >
+      <span class="block text-2xl font-medium text-gray-100">{{
+        convertToRealCurrency.format(value)
+      }}</span>
     </div>
     <icon :size="32" color="rgb(21 128 61)" />
     <slot name="icon" />
