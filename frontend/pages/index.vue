@@ -4,14 +4,16 @@ import {
   PhArrowCircleDown,
   PhCurrencyDollar,
 } from 'phosphor-vue'
+import { useUser } from '~/stores/user'
+
+const { apiURL } = useRuntimeConfig()
+const { user } = useUser()
 
 const {
   data: account,
   pending: accountPending,
   error: accountError,
-} = await useFetch(
-  `${process.env.API_URL}/account/${process.env.USER_DOCUMENT}`
-)
+} = await useFetch(`${apiURL}/account/${user.document}`)
 </script>
 
 <template>
@@ -51,7 +53,7 @@ const {
     <section>
       <Search />
 
-      <main class="mt-4 w-full">
+      <main v-if="account" class="mt-4 w-full">
         <Table :transactions="account.transactions" />
       </main>
     </section>
