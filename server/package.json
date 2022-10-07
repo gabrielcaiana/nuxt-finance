@@ -5,6 +5,11 @@
   "main": "src/server.ts",
   "scripts": {
     "server": "ts-node-dev --exit-child src/server.ts",
+    "pscale:dev": "pscale connect nuxt-finance dev --port 3309",
+    "pscale:main": "pscale connect nuxt-finance main --port 3309",
+    "pscale:shell": "pscale shell nuxt-finance dev",
+    "pscale:update": "npx prisma db push",
+    "prisma:studio": "npx prisma studio",
     "build": "tsc"
   },
   "keywords": [],
