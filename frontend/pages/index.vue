@@ -9,13 +9,15 @@ const {
   data: transactions,
   peding: transactionsPending,
   error: transactionsError,
-} = await useFetch('http://localhost:3333/transactions')
+} = await useFetch(`${process.env.API_URL}/transactions`)
 
 const {
   data: account,
   pending: accountPending,
   error: accountError,
-} = await useFetch('http://localhost:3333/account/45075141854')
+} = await useFetch(
+  `${process.env.API_URL}/account/${process.env.USER_DOCUMENT}`
+)
 </script>
 
 <template>
@@ -33,19 +35,19 @@ const {
       >
       <div v-else class="flex flex-col justify-between gap-4 md:flex-row">
         <CardMoney title="Entradas" :value="account.deposit">
-          <template v-slot:icon>
+          <template #icon>
             <PhArrowCircleUp :size="32" color="rgb(21 128 61)" />
           </template>
         </CardMoney>
 
         <CardMoney title="Saídas" :value="account.expense">
-          <template v-slot:icon>
+          <template #icon>
             <PhArrowCircleDown :size="32" color="rgb(239 68 68)" />
           </template>
         </CardMoney>
 
         <CardMoney title="Total" :value="account.balance" cardBalance>
-          <template v-slot:icon>
+          <template #icon>
             <PhCurrencyDollar :size="32" color="white" />
           </template>
         </CardMoney>
