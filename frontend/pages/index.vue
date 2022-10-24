@@ -6,6 +6,10 @@ import {
 } from 'phosphor-vue'
 import { useUser } from '~/stores/user'
 
+useHead({
+  title: 'Início',
+})
+
 const { apiURL } = useRuntimeConfig()
 const { user } = useUser()
 
