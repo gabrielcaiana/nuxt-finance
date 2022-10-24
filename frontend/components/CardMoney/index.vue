@@ -44,7 +44,7 @@ const handleCardBg =
         convertToRealCurrency.format(value)
       }}</span>
     </div>
-    <icon :size="32" color="rgb(21 128 61)" />
+    <icon :size="32" class="text-green-700" />
     <slot name="icon" />
   </div>
 </template>

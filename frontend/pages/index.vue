@@ -32,13 +32,13 @@ const {
       <div v-else class="flex flex-col justify-between gap-4 md:flex-row">
         <CardMoney title="Entradas" :value="account.deposit">
           <template #icon>
-            <PhArrowCircleUp :size="32" color="rgb(21 128 61)" />
+            <PhArrowCircleUp :size="32" class="text-green-700" />
           </template>
         </CardMoney>
 
         <CardMoney title="Saídas" :value="account.expense">
           <template #icon>
-            <PhArrowCircleDown :size="32" color="rgb(239 68 68)" />
+            <PhArrowCircleDown :size="32" class="text-red-700" />
           </template>
         </CardMoney>
 

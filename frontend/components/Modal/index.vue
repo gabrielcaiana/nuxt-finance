@@ -103,7 +103,7 @@ const emit = defineEmits(['close'])
                     Entrada
                     <PhArrowCircleUp
                       :size="24"
-                      :color="deposit ? 'white' : 'rgb(21 128 61)'"
+                      :class="deposit ? 'white' : 'text-green-700'"
                     />
                   </button>
                   <button
@@ -116,7 +116,7 @@ const emit = defineEmits(['close'])
                     Saída
                     <PhArrowCircleDown
                       :size="24"
-                      :color="expense ? 'white' : 'rgb(239 68 68)'"
+                      :class="expense ? 'white' : 'text-red-700'"
                     />
                   </button>
                 </div>
