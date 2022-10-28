@@ -7,8 +7,6 @@ import {
   DialogTitle,
 } from '@headlessui/vue'
 
-import { PhArrowCircleUp, PhArrowCircleDown, PhX } from 'phosphor-vue'
-
 const { data: categories } = await useFetch('http://localhost:3333/categories')
 
 const deposit = ref(false)
@@ -70,9 +68,10 @@ const emit = defineEmits(['close'])
                   Nova transação
                 </DialogTitle>
 
-                <PhX
+                <Icon
+                  name="ph:x"
                   class="cursor-pointer"
-                  :size="24"
+                  size="24"
                   color="white"
                   @click="emit('close')"
                 />
@@ -101,8 +100,9 @@ const emit = defineEmits(['close'])
                     ]"
                   >
                     Entrada
-                    <PhArrowCircleUp
-                      :size="24"
+                    <Icon
+                      name="ph:arrow-circle-up"
+                      size="24"
                       :class="deposit ? 'white' : 'text-green-700'"
                     />
                   </button>
@@ -114,8 +114,9 @@ const emit = defineEmits(['close'])
                     ]"
                   >
                     Saída
-                    <PhArrowCircleDown
-                      :size="24"
+                    <Icon
+                      name="ph:arrow-circle-down"
+                      size="24"
                       :class="expense ? 'white' : 'text-red-700'"
                     />
                   </button>

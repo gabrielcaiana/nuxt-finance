@@ -1,9 +1,11 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   css: ['@/assets/css/tailwind.css'],
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', 'nuxt-icon'],
   runtimeConfig: {
-    apiURL: process.env.API_URL,
+    public: {
+      apiURL: process.env.API_URL,
+    },
   },
   build: {
     postcss: {

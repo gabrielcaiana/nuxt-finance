@@ -1,6 +1,4 @@
-<script setup>
-import { PhMagnifyingGlass } from 'phosphor-vue'
-</script>
+<script setup></script>
 
 <template>
   <div class="mt-12 flex flex-col gap-4 md:flex-row">
@@ -13,7 +11,7 @@ import { PhMagnifyingGlass } from 'phosphor-vue'
       class="flex flex-row-reverse items-center justify-center gap-3 rounded-lg border border-white px-4 py-3 font-medium text-white transition-colors"
     >
       Buscar
-      <PhMagnifyingGlass :size="24" color="white" />
+      <Icon name="ph:magnifying-glass" size="24" color="white" />
     </button>
   </div>
 </template>
