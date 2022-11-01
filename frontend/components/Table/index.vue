@@ -22,6 +22,7 @@ const deleteTransaction = async (transaction) => {
     `${config.public.apiURL}/transactions/${transaction.id}`,
     {
       method: 'DELETE',
+      initialCache: false,
     }
   )
 

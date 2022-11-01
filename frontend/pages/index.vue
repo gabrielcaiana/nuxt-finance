@@ -11,9 +11,10 @@ const { user } = useUser()
 const account = ref(null)
 
 async function refreshAccount() {
-  const { data } = await useFetch(`${apiURL}/account/${user.document}`)
+  const { data } = await useFetch(`${apiURL}/account/${user.document}`, {
+    initialCache: false,
+  })
   account.value = data.value
-  console.log(account.value)
 }
 
 refreshAccount()
