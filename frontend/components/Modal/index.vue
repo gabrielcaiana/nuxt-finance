@@ -7,9 +7,8 @@ import {
   DialogTitle,
 } from '@headlessui/vue'
 
-const { apiURL } = useRuntimeConfig()
 const user = useUser()
-const { data: categories } = await useFetch(`${apiURL}/categories`)
+const categories = await useCategorie().get()
 
 defineProps({
   isOpen: Boolean,
@@ -30,13 +29,10 @@ const createTransaction = async () => {
     ...form.value,
     amount: parseFloat(form.value.amount),
   }
-  const { error } = await useFetch(`${apiURL}/transactions`, {
-    method: 'POST',
-    body,
-    initialCache: false,
-  })
 
-  if (error.value) {
+  const error = await useTransaction().create(body)
+
+  if (error) {
     console.log(error)
   } else {
     emit('close')

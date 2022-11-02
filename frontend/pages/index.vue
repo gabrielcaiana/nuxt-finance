@@ -6,7 +6,7 @@ useHead({
 const account = ref(null)
 
 const refreshAccount = async () => {
-  account.value = await useTransactions().get()
+  account.value = await useAccount().get()
 }
 
 refreshAccount()

@@ -7,7 +7,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['refresh:account'])
-const config = useRuntimeConfig()
 const handleTransactions = computed({
   get() {
     return props.transactions
@@ -18,16 +17,10 @@ const handleTransactions = computed({
 })
 
 const deleteTransaction = async (transaction) => {
-  const { error } = await useFetch(
-    `${config.public.apiURL}/transactions/${transaction.id}`,
-    {
-      method: 'DELETE',
-      initialCache: false,
-    }
-  )
+  const error = await useTransaction().delete(transaction.id)
 
-  if (error.value) {
-    throw new Error(error.value)
+  if (error) {
+    throw new Error(error)
   } else {
     const index = handleTransactions.value.findIndex(
       (item) => item.id === transaction.id
