@@ -13,7 +13,6 @@ export default {
         id: true,
         description: true,
         amount: true,
-        date: true,
         categoriesId: true,
         categories: {
           select: {
@@ -41,7 +40,6 @@ export default {
         description: body.description,
         amount: body.amount,
         type: body.type,
-        date: new Date(body.date),
         categoriesId: body.categoriesId,
         accountCpf: body.accountCpf,
       },
@@ -60,7 +58,6 @@ export default {
 
       data: {
         ...body,
-        date: new Date(body.date),
       },
     });
 

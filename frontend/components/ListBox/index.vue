@@ -15,6 +15,7 @@ defineProps({
 })
 
 const selectedItem = ref({ name: 'Selecione a categoria' })
+const emit = defineEmits(['change'])
 </script>
 
 <template>
@@ -45,6 +46,7 @@ const selectedItem = ref({ name: 'Selecione a categoria' })
             class="absolute mt-1 mb-4 max-h-[200px] w-full overflow-scroll rounded-md bg-zinc-800 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
           >
             <ListboxOption
+              @click="emit('change', selectedItem.id)"
               v-slot="{ active, selected }"
               v-for="item in items"
               :key="item.id"

@@ -22,7 +22,6 @@ model Transactions {
   id           String     @id @unique @default(uuid())
   description  String
   amount       Float
-  date         DateTime
   categoriesId String
   type         String
   categories   Categories @relation(fields: [categoriesId], references: [id])

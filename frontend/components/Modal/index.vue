@@ -7,26 +7,41 @@ import {
   DialogTitle,
 } from '@headlessui/vue'
 
-const { data: categories } = await useFetch('http://localhost:3333/categories')
-
-const deposit = ref(false)
-const expense = ref(false)
-
-const setDeposit = () => {
-  deposit.value = true
-  expense.value = false
-}
-
-const setExpense = () => {
-  expense.value = true
-  deposit.value = false
-}
+const { apiURL } = useRuntimeConfig()
+const user = useUser()
+const { data: categories } = await useFetch(`${apiURL}/categories`)
 
 defineProps({
   isOpen: Boolean,
 })
 
 const emit = defineEmits(['close'])
+
+const form = ref({
+  description: null,
+  amount: null,
+  type: null,
+  categoriesId: null,
+  accountCpf: user.document,
+})
+
+const createTransaction = async () => {
+  const body = {
+    ...form.value,
+    amount: parseFloat(form.value.amount),
+  }
+  const { error } = await useFetch(`${apiURL}/transactions`, {
+    method: 'POST',
+    body,
+    initialCache: false,
+  })
+
+  if (error.value) {
+    console.log(error)
+  } else {
+    emit('close')
+  }
+}
 </script>
 
 <template>
@@ -79,45 +94,54 @@ const emit = defineEmits(['close'])
 
               <div class="mt-2 flex flex-col gap-3">
                 <input
+                  v-model="form.description"
                   class="text-small w-full flex-1 rounded-lg bg-zinc-800 py-3 px-4 text-white placeholder:text-zinc-500"
                   type="text"
                   placeholder="Descrição"
                 />
                 <input
+                  v-model="form.amount"
                   class="text-small w-full flex-1 rounded-lg bg-zinc-800 py-3 px-4 text-white placeholder:text-zinc-500"
                   type="text"
                   placeholder="Valor"
                 />
 
-                <ListBox :items="categories" />
+                <ListBox
+                  :items="categories"
+                  @change="form.categoriesId = $event"
+                />
 
                 <div class="flex gap-4">
                   <button
-                    @click="setDeposit"
+                    @click="form.type = 'deposit'"
                     :class="[
                       'flex w-full justify-center gap-3 rounded-md py-4 text-white',
-                      deposit ? 'bg-green-700' : 'bg-zinc-800',
+                      form.type === 'deposit' ? 'bg-green-700' : 'bg-zinc-800',
                     ]"
                   >
                     Entrada
                     <Icon
                       name="ph:arrow-circle-up"
                       size="24"
-                      :class="deposit ? 'white' : 'text-green-700'"
+                      :class="
+                        form.type === 'deposit' ? 'white' : 'text-green-700'
+                      "
                     />
                   </button>
                   <button
-                    @click="setExpense"
+                    @click="form.type = 'expense'"
                     :class="[
                       'flex w-full justify-center gap-3 rounded-md py-4 text-white',
-                      expense ? 'bg-red-700' : 'bg-zinc-800',
+                      form.type === 'expense' ? 'bg-red-700' : 'bg-zinc-800',
                     ]"
                   >
                     Saída
                     <Icon
                       name="ph:arrow-circle-down"
                       size="24"
-                      :class="expense ? 'white' : 'text-red-700'"
+                      :class="
+                        form.type === 'expense' ? 'white' : 'text-red-700'
+                      "
                     />
                   </button>
                 </div>
@@ -125,7 +149,7 @@ const emit = defineEmits(['close'])
 
               <div class="mt-8">
                 <button
-                  @click="emit('close')"
+                  @click="createTransaction"
                   class="w-full rounded-lg bg-green-700 px-4 py-3 font-medium text-white transition-colors hover:bg-green-800"
                 >
                   Cadastrar transação

@@ -1,20 +1,12 @@
 <script setup>
-import { ref } from 'vue'
-import { useUser } from '~/stores/user'
-
 useHead({
   title: 'Início',
 })
 
-const { apiURL } = useRuntimeConfig()
-const { user } = useUser()
 const account = ref(null)
 
-async function refreshAccount() {
-  const { data } = await useFetch(`${apiURL}/account/${user.document}`, {
-    initialCache: false,
-  })
-  account.value = data.value
+const refreshAccount = async () => {
+  account.value = await useTransactions().get()
 }
 
 refreshAccount()

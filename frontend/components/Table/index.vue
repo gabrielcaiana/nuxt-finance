@@ -68,9 +68,9 @@ const deleteTransaction = async (transaction) => {
                   <td class="whitespace-nowrap px-6 py-4 text-sm text-white">
                     {{ transaction.categories.name }}
                   </td>
-                  <td class="whitespace-nowrap px-6 py-4 text-sm text-white">
+                  <!-- <td class="whitespace-nowrap px-6 py-4 text-sm text-white">
                     {{ new Date(transaction.date).toLocaleDateString('pt-BR') }}
-                  </td>
+                  </td> -->
                   <td class="whitespace-nowrap px-6 py-4 text-sm text-white">
                     <Icon
                       name="ph:trash"

@@ -32,11 +32,7 @@ export default {
         email: true,
         cpf: true,
         transactions: {
-          orderBy: {
-            date: 'desc',
-          },
           select: {
-            date: true,
             amount: true,
             categories: true,
             id: true,
