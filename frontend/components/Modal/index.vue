@@ -9,7 +9,8 @@ import {
 
 const user = useUser()
 const categories = await useCategorie().get()
-
+const { $bus } = useNuxtApp()
+const loading = ref(false)
 defineProps({
   isOpen: Boolean,
 })
@@ -25,6 +26,8 @@ const form = ref({
 })
 
 const createTransaction = async () => {
+  loading.value = true
+
   const body = {
     ...form.value,
     amount: parseFloat(form.value.amount),
@@ -35,8 +38,18 @@ const createTransaction = async () => {
   if (error) {
     console.log(error)
   } else {
-    const { $bus } = useNuxtApp()
     $bus.$emit('reload:transactions')
+    $bus.$emit('toast:success', { message: 'Transação criada com sucesso!' })
+
+    form.value = {
+      description: null,
+      amount: null,
+      type: null,
+      categoriesId: null,
+      accountCpf: user.document,
+    }
+
+    loading.value = false
     emit('close')
   }
 }
@@ -147,10 +160,12 @@ const createTransaction = async () => {
 
               <div class="mt-8">
                 <button
+                  :disabled="loading"
                   @click="createTransaction"
-                  class="w-full rounded-lg bg-green-700 px-4 py-3 font-medium text-white transition-colors hover:bg-green-800"
+                  class="flex w-full items-center justify-center rounded-lg bg-green-700 px-4 py-3 font-medium text-white transition-colors hover:bg-green-800"
                 >
-                  Cadastrar transação
+                  <Spinner v-if="loading" />
+                  <span v-else> Cadastrar transação</span>
                 </button>
               </div>
             </DialogPanel>

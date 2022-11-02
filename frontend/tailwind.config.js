@@ -6,10 +6,11 @@ module.exports = {
     './pages/**/*.vue',
     './app.vue',
     './plugins/**/*.{js,ts}',
+    './node_modules/flowbite/**/*.js',
   ],
   media: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 }

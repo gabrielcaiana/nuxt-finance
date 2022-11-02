@@ -18,6 +18,7 @@
     "@headlessui/vue": "^1.7.2",
     "@pinia/nuxt": "^0.4.2",
     "@vitest/ui": "^0.22.1",
+    "flowbite": "^1.5.3",
     "mitt": "^3.0.0",
     "vitest": "^0.23.4"
   },
