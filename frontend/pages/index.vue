@@ -10,6 +10,9 @@ const refreshAccount = async () => {
 }
 
 refreshAccount()
+
+const { $bus } = useNuxtApp()
+$bus.$on('reload:transactions', () => refreshAccount())
 </script>
 
 <template>

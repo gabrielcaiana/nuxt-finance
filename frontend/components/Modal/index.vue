@@ -35,6 +35,8 @@ const createTransaction = async () => {
   if (error) {
     console.log(error)
   } else {
+    const { $bus } = useNuxtApp()
+    $bus.$emit('reload:transactions')
     emit('close')
   }
 }
