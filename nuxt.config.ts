@@ -14,9 +14,16 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['stores'],
   },
-  runtimeConfig: {
-    public: {
-      apiURL: process.env.API_URL,
+  vite: {
+    server: {
+      proxy: {
+        '/api': {
+          target: process.env.API_URL,
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
     },
   },
   build: {

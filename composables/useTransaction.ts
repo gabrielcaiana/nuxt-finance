@@ -1,9 +1,7 @@
 export default () => {
-  const { apiURL } = useRuntimeConfig()
-
   return {
     create: async (body) => {
-      const { error } = await useFetch(`${apiURL}/transactions`, {
+      const { error } = await useFetch(`api/transactions`, {
         method: 'POST',
         body,
         initialCache: false,
@@ -12,7 +10,7 @@ export default () => {
     },
 
     delete: async (id) => {
-      const { error } = await useFetch(`${apiURL}/transactions/${id}`, {
+      const { error } = await useFetch(`api/transactions/${id}`, {
         method: 'DELETE',
         initialCache: false,
       })
