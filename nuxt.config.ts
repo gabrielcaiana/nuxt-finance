@@ -14,17 +14,8 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['stores'],
   },
-  vite: {
-    server: {
-      proxy: {
-        '/api': {
-          target: process.env.API_URL,
-          changeOrigin: true,
-          ws: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-      },
-    },
+  publicRuntimeConfig: {
+    apiUrl: process.env.API_URL,
   },
   build: {
     postcss: {
