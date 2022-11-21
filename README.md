@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Nuxt Finance
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+<img src="public/preview.png" width="100%" alt="preview" />
 
 ## Setup
 
