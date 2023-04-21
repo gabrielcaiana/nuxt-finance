@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   components: [{ path: '@/components', pathPrefix: false }],
   modules: [
     'nuxt-icon',
+    '@nuxtjs/tailwindcss',
     [
       '@pinia/nuxt',
       {
@@ -14,17 +15,9 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['stores'],
   },
-  publicRuntimeConfig: {
-    apiUrl: process.env.API_URL,
-  },
-  build: {
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          tailwindcss: {},
-          autoprefixer: {},
-        },
-      },
+  runtimeConfig: {
+    public: {
+      apiUrl: process.env.API_URL,
     },
   },
 })

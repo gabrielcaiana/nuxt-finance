@@ -1,12 +1,10 @@
 export default () => {
   const user = useUser()
-  const { apiUrl } = useRuntimeConfig()
+  const { apiUrl } = useRuntimeConfig().public
 
   return {
     get: async () => {
-      const { data } = await useFetch(`${apiUrl}/account/${user.document}`, {
-        initialCache: false,
-      })
+      const { data } = await useFetch(`${apiUrl}/account/${user.document}`)
       return data.value
     },
   }

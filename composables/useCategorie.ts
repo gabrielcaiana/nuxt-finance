@@ -1,5 +1,5 @@
 export default () => {
-  const { apiUrl } = useRuntimeConfig()
+  const { apiUrl } = useRuntimeConfig().public
 
   return {
     get: async () => {

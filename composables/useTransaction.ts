@@ -1,21 +1,19 @@
 export default () => {
-  const { apiUrl } = useRuntimeConfig()
+  const { apiUrl } = useRuntimeConfig().public
 
   return {
-    create: async (body) => {
+    create: async (body: any) => {
       const { error } = await useFetch(`${apiUrl}/transactions`, {
         method: 'POST',
         body,
-        initialCache: false,
         server: false,
       })
       return error.value
     },
 
-    delete: async (id) => {
+    delete: async (id: string) => {
       const { error } = await useFetch(`${apiUrl}/transactions/${id}`, {
         method: 'DELETE',
-        initialCache: false,
         server: false,
       })
 
